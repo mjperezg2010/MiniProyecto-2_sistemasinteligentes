@@ -9,11 +9,31 @@ def load_file(file_name):
 def process_data(file_name):    
     string_array = np.array(load_file(file_name)[1:][:])
     
-    Y = [ row [string_array.shape[1]-1 ] for row in string_array]
+    Y = [ get_num(row [string_array.shape[1]-1 ]) for row in string_array]
     X = np.delete(string_array, string_array.shape[1]-1, 1)
 
     return X,Y
 
+def get_num(value):
+    if value == "F":
+        return 0
+    elif value == "M":
+        return 1
+    elif value == "Si" or value == "SI":
+        return 0
+    elif value == "No" or value == "NO":
+        return 1
+    elif value == "Persistente":
+        return 2
+    elif value == "NA":
+        return -1
+    elif value == "Positiva":
+        return 0
+    elif value == "Negativa":
+        return 1
+    else:
+        pass
+    
 def split_data(n_groups,X,Y):
     groups_X = []
     groups_Y = []
