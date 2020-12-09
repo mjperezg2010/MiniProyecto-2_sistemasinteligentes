@@ -37,5 +37,10 @@ def print_data(a, b, c, d, e, i, F1):
 
 def F1(model,x,y):
     predicted = model.predict(x)
-    f1=f1_score(predicted,y)
-    return f1
+    results = f1_score(predicted, y, average=None)
+    acum = 0
+    total = len(results)
+    for i in results:
+        acum = acum + i
+
+    return acum / total
