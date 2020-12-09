@@ -1,11 +1,9 @@
-
-
 import utilities as util
-from sklearn.ensemble import RandomForestClassifier as model
+
+from sklearn.ensemble import RandomForestClassifier as model_gen
 
 # Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    main()
+
 
 def main():
     
@@ -25,7 +23,7 @@ def main():
             for c in criterion:
                 for d in max_depth:
                     for e in max_features:                 
-                        model = model(
+                        model = model_gen(
                             n_estimators = b,
                             criterion = c,
                             max_depth = d,
@@ -35,14 +33,17 @@ def main():
                         for i in range(groups):
                             validation_X = groups_X[i]
                             validation_Y = groups_Y[i]
+                            training_X=[]
+                            training_Y=[]
                             for j in range(groups):
                                 if j != i:
                                     training_X += groups_X[i]
                                     training_Y += groups_Y[i]                            
                             model.fit(training_X,training_Y)
-                            F1 = util.F1(model,validation_X,validation_Y)
-                            print(util.print_data(a,b,c,d,e,i,F1))
+                            F1_val = util.F1(model,validation_X,validation_Y)
+                            util.print_data(a,b,c,d,e,i,F1_val)
                             
-
+if __name__ == '__main__':
+    main()
     
 

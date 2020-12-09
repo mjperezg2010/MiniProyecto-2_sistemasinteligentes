@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 import random
+from sklearn.metrics import f1_score
 
 def load_file(file_name):
     return list(csv.reader(open(file_name), delimiter=','))
@@ -30,9 +31,11 @@ def split_data(n_groups,X,Y):
         groups_Y.append(actual_Y)
     return groups_X,groups_Y
 
-def print_data(a,b,c,d,e,i,F1):
+def print_data(a, b, c, d, e, i, F1):
     print("dataset:"+str(a)+" n_trees: "+str(b)+" criterio: "+str(c)+
         " max_depth: "+str(d)+" n_features: "+str(e)+" model_num: "+str(i)+" F1: "+str(F1))
 
-def F1(model,X,Y):
-    pass
+def F1(model,x,y):
+    predicted = model.predict(x)
+    f1=f1_score(predicted,y)
+    return f1
