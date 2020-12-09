@@ -36,15 +36,16 @@ def split_data(n_groups,X,Y):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    main()
+
+def main():
     X,Y = process_data("clinica_train_synth_dengue.csv")
 
     trees = 1
     criterion = ['gini','entropy']
     max_depth = 1
     max_features = ['auto', 'log2']
-
-
-    ''
+    
     model = nicolle(
         n_estimators = trees,
         criterion = criterion,
