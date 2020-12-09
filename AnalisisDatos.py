@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+import seaborn
 
 def is_number(a):
     a = 12.02
@@ -18,8 +18,8 @@ def matriz(datos,column):
 
 def BoxPlot(datos,column):
     plt.figure(figsize=(40,15))
-    sns.set(font_scale=1.5)
-    sns.boxplot(x=datos[column],y=datos['clase'],data=datos)
+    seaborn.set(font_scale=1.5)
+    seaborn.boxplot(x=datos[column],y=datos['clase'],data=datos)
     plt.show()
 
 def preprocesar(datos):
