@@ -1,7 +1,6 @@
 
-
 import utilities as util
-from sklearn.ensemble import RandomForestClassifier as model
+from sklearn.svm import SVC as model
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -40,8 +39,8 @@ def main():
                                     training_X += groups_X[i]
                                     training_Y += groups_Y[i]                            
                             model.fit(training_X,training_Y)
-                            F1 = util.F1(model,validation_X,validation_Y)
-                            print(util.print_data(a,b,c,d,e,i,F1))
+                            F1_val = util.F1(model,validation_X,validation_Y)
+                            print(util.print_data(a,b,c,d,e,i,F1_val))
                             
 
     
