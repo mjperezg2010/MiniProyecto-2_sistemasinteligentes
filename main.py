@@ -11,7 +11,7 @@ def main():
                     "laboratorio_train_synth_dengue.csv",
                     "completo_train_synth_dengue.csv"]
     
-    trees = [ i*10 for i in range(5) ]    
+    trees = [ i*10 for i in range(1,5) ]
     criterion = ['gini','entropy']
     max_depth = [None,3,6]
     max_features = ['auto', 'log2']

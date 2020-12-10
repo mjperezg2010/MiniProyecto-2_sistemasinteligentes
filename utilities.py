@@ -2,38 +2,38 @@ import numpy as np
 import csv
 import random
 from sklearn.metrics import f1_score
+import pandas as pd
 
 def load_file(file_name):
-    return list(csv.reader(open(file_name), delimiter=','))
+    return pd.read_csv(file_name)
+    #return list(csv.reader(open(file_name), delimiter=','))
 
 def process_data(file_name):    
-    string_array = np.array(load_file(file_name)[1:][:])
-    
+    string_array = load_file(file_name)
+    string_array=string_array.replace(np.nan,'NA',regex=True)
+    string_array=string_array.replace("NO", "No", regex=True)
+    string_array=string_array.replace("F",0,regex=True)
+    string_array=string_array.replace("M", 1, regex=True)
+    string_array=string_array.replace("Si", 0, regex=True)
+    string_array=string_array.replace("No", 1, regex=True)
+    string_array=string_array.replace("Persistente", 2, regex=True)
+    string_array=string_array.replace("NA", -1, regex=True)
+    string_array=string_array.replace("Positiva", 0, regex=True)
+    string_array=string_array.replace("Negativa", 1, regex=True)
+
+    X = string_array.loc[:, string_array.columns != 'clase']
+    Y = string_array['clase']
+
+    print(X.values[0])
+
+    """
     Y = [ get_num(row [string_array.shape[1]-1 ]) for row in string_array]
     X = np.delete(string_array, string_array.shape[1]-1, 1)
+    """
 
     return X,Y
 
-def get_num(value):
-    if value == "F":
-        return 0
-    elif value == "M":
-        return 1
-    elif value == "Si" or value == "SI":
-        return 0
-    elif value == "No" or value == "NO":
-        return 1
-    elif value == "Persistente":
-        return 2
-    elif value == "NA":
-        return -1
-    elif value == "Positiva":
-        return 0
-    elif value == "Negativa":
-        return 1
-    else:
-        pass
-    
+
 def split_data(n_groups,X,Y):
     groups_X = []
     groups_Y = []
@@ -45,8 +45,8 @@ def split_data(n_groups,X,Y):
         actual_X = []
         actual_Y = []
         for j in range(int(len(X)/n_groups)):
-            actual_X.append(X[temp[i*int(len(X)/n_groups)+j]])
-            actual_Y.append(Y[temp[i*int(len(X)/n_groups)+j]])
+            actual_X.append(X.values[temp[i*int(len(X)/n_groups)+j]])
+            actual_Y.append(Y.values[temp[i*int(len(X)/n_groups)+j]])
         groups_X.append(actual_X)
         groups_Y.append(actual_Y)
     return groups_X,groups_Y
