@@ -7,12 +7,14 @@ from sklearn.ensemble import RandomForestClassifier as model_gen
 
 def main():
     
-    data_sets = ["clinica_train_synth_dengue.csv",
-                    "laboratorio_train_synth_dengue.csv",
-                    "completo_train_synth_dengue.csv"]
+    #data_sets = ["clinica_train_synth_dengue.csv",
+     #               "laboratorio_train_synth_dengue.csv",
+     #               "completo_train_synth_dengue.csv"]
+    data_sets = ["clinica_train_synth_dengue.csv"]
     
     trees = [ i*10 for i in range(1,5) ]
-    criterion = ['gini','entropy']
+    #criterion = ['gini','entropy']
+    criterion = ['gini']
     max_depth = [None,3,6]
     max_features = ['auto', 'log2']
     groups = 5

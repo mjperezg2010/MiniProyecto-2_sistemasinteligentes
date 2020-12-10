@@ -23,14 +23,6 @@ def process_data(file_name):
 
     X = string_array.loc[:, string_array.columns != 'clase']
     Y = string_array['clase']
-
-    print(X.values[0])
-
-    """
-    Y = [ get_num(row [string_array.shape[1]-1 ]) for row in string_array]
-    X = np.delete(string_array, string_array.shape[1]-1, 1)
-    """
-
     return X,Y
 
 
