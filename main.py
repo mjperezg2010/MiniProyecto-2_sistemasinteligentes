@@ -10,7 +10,7 @@ def main():
     #data_sets = ["clinica_train_synth_dengue.csv",
      #               "laboratorio_train_synth_dengue.csv",
      #               "completo_train_synth_dengue.csv"]
-    data_sets = ["clinica_train_synth_dengue.csv"]
+    data_sets = ["laboratorio_train_synth_dengue.csv"]
     
     trees = [ i*10 for i in range(1,5) ]
     #trees = [10]
@@ -42,7 +42,7 @@ def main():
                             for j in range(groups):
                                 if j != i:
                                     training_X += groups_X[i]
-                                    training_Y += groups_Y[i]                            
+                                    training_Y += groups_Y[i]
                             model.fit(training_X,training_Y)
                             F1_val = util.F1(model,validation_X,validation_Y)
                             values_f1+=(str)(F1_val)+" "

@@ -3,6 +3,8 @@ import csv
 import random
 from sklearn.metrics import f1_score
 import pandas as pd
+from sklearn.model_selection import KFold
+
 
 def load_file(file_name):
     return pd.read_csv(file_name)
@@ -37,11 +39,28 @@ def split_data(n_groups,X,Y):
         actual_X = []
         actual_Y = []
         for j in range(int(len(X)/n_groups)):
-            actual_X.append(X.values[temp[i*int(len(X)/n_groups)+j]])
-            actual_Y.append(Y.values[temp[i*int(len(X)/n_groups)+j]])
+            actual_X.append(X.values[temp[i*int(len(X.values)/n_groups)+j]])
+            print(X.values[temp[i*int(len(X.values)/n_groups)+j]])
+            actual_Y.append(Y.values[temp[i*int(len(X.values)/n_groups)+j]])
         groups_X.append(actual_X)
         groups_Y.append(actual_Y)
     return groups_X,groups_Y
+
+def split(n_groups,X,y):
+    groups_X = []
+    groups_Y = []
+
+    kf = KFold(n_splits=n_groups, random_state=None, shuffle=False)
+
+    for train_index, test_index in kf.split(X):
+        # print("TRAIN:", train_index, "TEST:", test_index)
+        X_train, X_test = X.values[train_index], X.values[test_index]
+        y_train, y_test = y.values[train_index], y.values[test_index]
+        groups_X.append(X_train)
+        groups_Y.append(y_train)
+
+    return groups_X, groups_Y
+
 
 def print_data(a, b, c, d, e, i, F1):
     print(str(a)+" "+str(b)+" "+str(c)+" "+str(d)+" "+str(e)+" "+str(i)
