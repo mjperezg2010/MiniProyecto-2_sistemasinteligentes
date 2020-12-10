@@ -44,8 +44,8 @@ def split_data(n_groups,X,Y):
     return groups_X,groups_Y
 
 def print_data(a, b, c, d, e, i, F1):
-    print("dataset:"+str(a)+" n_trees: "+str(b)+" criterio: "+str(c)+
-        " max_depth: "+str(d)+" n_features: "+str(e)+" model_num: "+str(i)+" F1: "+str(F1))
+    print(str(a)+" "+str(b)+" "+str(c)+" "+str(d)+" "+str(e)+" "+str(i)
+        +" "+str(F1))
 
 def F1(model,x,y):
     predicted = model.predict(x)
