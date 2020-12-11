@@ -11,9 +11,9 @@ def main():
                     "laboratorio_train_synth_dengue.csv",
                     "completo_train_synth_dengue.csv"]
     
-    C = [ i/10 for i in range(1,15) ]
-    kernels = ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']
-    gamma = ['scale', 'auto']+[ i/10 for i in range(1,15) ]
+    C = [ 0.5,1,1.5 ]
+    kernels = ['linear', 'rbf', 'sigmoid']
+    gamma = ['scale', 'auto']
     
     groups = 5
 
