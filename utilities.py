@@ -23,11 +23,16 @@ def process_data(file_name):
     string_array=string_array.replace("Positiva", 0, regex=True)
     string_array=string_array.replace("Negativa", 1, regex=True)
 
+    string_array=string_array.replace("Dengue_Grave","0",regex=True)
+    string_array = string_array.replace("Dengue_NoGrave_NoSignos", "1", regex=True)
+    string_array = string_array.replace("Dengue_NoGrave_SignosAlarma", "2", regex=True)
+    string_array = string_array.replace("No_Dengue", "3", regex=True)
+
     X = string_array.loc[:, string_array.columns != 'clase']
     Y = string_array['clase']
     return X,Y
 
-
+"""
 def split_data(n_groups,X,Y):
     groups_X = []
     groups_Y = []
@@ -40,13 +45,12 @@ def split_data(n_groups,X,Y):
         actual_Y = []
         for j in range(int(len(X)/n_groups)):
             actual_X.append(X.values[temp[i*int(len(X.values)/n_groups)+j]])
-            print(X.values[temp[i*int(len(X.values)/n_groups)+j]])
             actual_Y.append(Y.values[temp[i*int(len(X.values)/n_groups)+j]])
         groups_X.append(actual_X)
         groups_Y.append(actual_Y)
     return groups_X,groups_Y
-
-def split(n_groups,X,y):
+"""
+def split_data(n_groups,X,y):
     groups_X = []
     groups_Y = []
 
@@ -59,7 +63,9 @@ def split(n_groups,X,y):
         groups_X.append(X_train)
         groups_Y.append(y_train)
 
-    return groups_X, groups_Y
+
+
+    return np.array(groups_X) , np.array(groups_Y)
 
 
 def print_data(a, b, c, d, e, i, F1):
