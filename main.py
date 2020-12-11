@@ -50,10 +50,9 @@ def main():
                                 if j != i:
                                     training_X=np.concatenate((training_X,groups_X[i]))
                                     training_Y = np.concatenate((training_Y, groups_Y[i]))
-                                    #raining_X += groups_X[i]
-                                    #training_Y += groups_Y[i]
 
                             model.fit(training_X,training_Y)
+                            model.predict(training_X)
                             F1_val = util.F1(model,validation_X,validation_Y)
                             values_f1+=(str)(F1_val)+" "
                         util.print_data(a,b,c,d,e,i,values_f1)
