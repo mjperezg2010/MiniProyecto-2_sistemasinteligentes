@@ -1,15 +1,16 @@
 import numpy as np
-import csv
-import random
 from sklearn.metrics import f1_score
 import pandas as pd
 from sklearn.model_selection import KFold
+from sklearn.preprocessing import StandardScaler
 
+#Funciones
 
+#Funcion para cargar el archivo
 def load_file(file_name):
     return pd.read_csv(file_name)
-    #return list(csv.reader(open(file_name), delimiter=','))
 
+#Funcion de procesamiento de los datos
 def process_data(file_name):    
     string_array = load_file(file_name)
     string_array=string_array.replace(np.nan,'NA',regex=True)
@@ -22,7 +23,6 @@ def process_data(file_name):
     string_array=string_array.replace("NA", -1, regex=True)
     string_array=string_array.replace("Positiva", 0, regex=True)
     string_array=string_array.replace("Negativa", 1, regex=True)
-
     string_array=string_array.replace("Dengue_Grave","0",regex=True)
     string_array = string_array.replace("Dengue_NoGrave_NoSignos", "1", regex=True)
     string_array = string_array.replace("Dengue_NoGrave_SignosAlarma", "2", regex=True)
@@ -50,6 +50,8 @@ def split_data(n_groups,X,Y):
         groups_Y.append(actual_Y)
     return groups_X,groups_Y
 """
+
+#Funcion para particionar los datasets
 def split_data(n_groups,X,y):
     groups_X = []
     groups_Y = []
@@ -63,15 +65,14 @@ def split_data(n_groups,X,y):
         groups_X.append(X_train)
         groups_Y.append(y_train)
 
-
-
     return np.array(groups_X) , np.array(groups_Y)
 
-
+#Funcion que imprime cada iteracion
 def print_data(a, b, c, d, e, i, F1):
     print(str(a)+" "+str(b)+" "+str(c)+" "+str(d)+" "+str(e)+" "+str(i)
         +" "+str(F1))
 
+#Funcion que devuelve el F1-score
 def F1(model,x,y):
     predicted = model.predict(x)
     results = f1_score(predicted, y, average=None)
@@ -79,5 +80,11 @@ def F1(model,x,y):
     total = len(results)
     for i in results:
         acum = acum + i
-
     return acum / total
+
+#Funcion de normalizacion
+def normalizacion(datos):
+    scaler = StandardScaler()
+    scaled = scaler.fit_transform(datos)
+    datos = pd.DataFrame(scaled)
+    return datos
