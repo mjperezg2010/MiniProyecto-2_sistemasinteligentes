@@ -23,10 +23,10 @@ def process_data(file_name):
     string_array=string_array.replace("NA", -1, regex=True)
     string_array=string_array.replace("Positiva", 0, regex=True)
     string_array=string_array.replace("Negativa", 1, regex=True)
-    string_array=string_array.replace("Dengue_Grave","0",regex=True)
-    string_array = string_array.replace("Dengue_NoGrave_NoSignos", "1", regex=True)
-    string_array = string_array.replace("Dengue_NoGrave_SignosAlarma", "2", regex=True)
-    string_array = string_array.replace("No_Dengue", "3", regex=True)
+    string_array=string_array.replace("Dengue_Grave",0,regex=True)
+    string_array = string_array.replace("Dengue_NoGrave_NoSignos", 1, regex=True)
+    string_array = string_array.replace("Dengue_NoGrave_SignosAlarma", 2, regex=True)
+    string_array = string_array.replace("No_Dengue", 3, regex=True)
 
     X = string_array.loc[:, string_array.columns != 'clase']
     Y = string_array['clase']
