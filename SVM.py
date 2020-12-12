@@ -12,7 +12,6 @@ def main():
     #                "completo_train_synth_dengue.csv"]
     data_sets=["completo_train_synth_dengue.csv"]
     C = [ 0.5,1,1.5 ]
-    #C = [1.5]
     kernels = ['linear', 'rbf', 'sigmoid']
     gamma = ['scale', 'auto']
     

@@ -13,23 +13,26 @@ def load_file(file_name):
 #Funcion de procesamiento de los datos
 def process_data(file_name):    
     string_array = load_file(file_name)
-    string_array=string_array.replace(np.nan,'NA',regex=True)
-    string_array=string_array.replace("NO", "No", regex=True)
-    string_array=string_array.replace("F",0,regex=True)
-    string_array=string_array.replace("M", 1, regex=True)
-    string_array=string_array.replace("Si", 0, regex=True)
-    string_array=string_array.replace("No", 1, regex=True)
-    string_array=string_array.replace("Persistente", 2, regex=True)
-    string_array=string_array.replace("NA", -1, regex=True)
-    string_array=string_array.replace("Positiva", 0, regex=True)
-    string_array=string_array.replace("Negativa", 1, regex=True)
-    string_array=string_array.replace("Dengue_Grave",0,regex=True)
+    string_array = string_array.replace("Dengue_Grave", 0, regex=True)
     string_array = string_array.replace("Dengue_NoGrave_NoSignos", 1, regex=True)
     string_array = string_array.replace("Dengue_NoGrave_SignosAlarma", 2, regex=True)
     string_array = string_array.replace("No_Dengue", 3, regex=True)
+    string_array = string_array.replace(np.nan,'NA',regex=True)
+    string_array = string_array.replace("NO", "No", regex=True)
+    string_array = string_array.replace("F",0,regex=True)
+    string_array = string_array.replace("M", 1, regex=True)
+    string_array = string_array.replace("Si", 0, regex=True)
+    string_array = string_array.replace("No", 1, regex=True)
+    string_array = string_array.replace("Persistente", 2, regex=True)
+    string_array = string_array.replace("NA", -1, regex=True)
+    string_array = string_array.replace("Positiva", 0, regex=True)
+    string_array = string_array.replace("Negativa", 1, regex=True)
+
+
 
     X = string_array.loc[:, string_array.columns != 'clase']
     Y = string_array['clase']
+
     return X,Y
 
 def preprocesar2(datos):
@@ -180,6 +183,7 @@ def preprocesar2(datos):
                 datos.iloc[[i, 6]] = 0
             elif datos.loc[i][6] >= 6250 and datos.loc[i][-1] == 2:
                 datos.iloc[[i, 6]] = 1
+    return datos
 
 """
 def split_data(n_groups,X,Y):

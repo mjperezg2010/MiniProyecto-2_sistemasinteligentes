@@ -4,8 +4,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn
-from sklearn.model_selection import KFold
-from sklearn.preprocessing import StandardScaler
 
 
 def is_number(a):
