@@ -32,6 +32,155 @@ def process_data(file_name):
     Y = string_array['clase']
     return X,Y
 
+def preprocesar2(datos):
+    if datos['plaquetas'][0] == datos.loc[0][1]:
+        for i in range(len(datos)):
+            if datos.loc[i][1] < 193000 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 1]] = 0
+            elif datos.loc[i][1] >= 193000 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 1]] = 1
+            elif datos.loc[i][1] < 275000 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 1]] = 0
+            elif datos.loc[i][1] >= 275000 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 1]] = 1
+            elif datos.loc[i][1] < 125000 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 1]] = 0
+            elif datos.loc[i][1] >= 125000 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 1]] = 1
+            elif datos.loc[i][1] < 198000 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 1]] = 0
+            elif datos.loc[i][1] >= 198000 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 1]] = 1
+    else:
+        for i in range(len(datos)):
+            if datos.loc[i][3] < 193000 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 193000 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 3]] = 1
+            elif datos.loc[i][3] < 275000 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 275000 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 3]] = 1
+            elif datos.loc[i][3] < 125000 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 125000 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 3]] = 1
+            elif datos.loc[i][3] < 198000 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 198000 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 3]] = 1
+
+    if datos['linfocitos'][0] == datos.loc[0][2]:
+        for i in range(len(datos)):
+            if datos.loc[i][2] < 0.41 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 2]] = 0
+            elif datos.loc[i][2] >= 0.41 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 2]] = 1
+            elif datos.loc[i][2] < 0.175 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 2]] = 0
+            elif datos.loc[i][2] >= 0.175 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 2]] = 1
+            elif datos.loc[i][2] < 0.47 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 2]] = 0
+            elif datos.loc[i][2] >= 0.47 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 2]] = 1
+            elif datos.loc[i][2] < 0.405 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 2]] = 0
+            elif datos.loc[i][2] >= 0.405 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 2]] = 1
+    else:
+        for i in range(len(datos)):
+            if datos.loc[i][4] < 0.41 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 0.41 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 4]] = 1
+            elif datos.loc[i][4] < 0.175 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 0.175 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 4]] = 1
+            elif datos.loc[i][4] < 0.47 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 0.47 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 4]] = 1
+            elif datos.loc[i][4] < 0.405 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 0.405 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 4]] = 1
+
+    if datos['hematocritos'][0] == datos.loc[0][3]:
+        for i in range(len(datos)):
+            if datos.loc[i][3] < 0.44 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 0.44 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 3]] = 1
+            elif datos.loc[i][3] < 0.422 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 0.422 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 3]] = 1
+            elif datos.loc[i][3] < 0.452 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 0.452 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 3]] = 1
+            elif datos.loc[i][3] < 0.43 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 3]] = 0
+            elif datos.loc[i][3] >= 0.43 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 3]] = 1
+    else:
+        for i in range(len(datos)):
+            if datos.loc[i][5] < 0.41 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 5]] = 0
+            elif datos.loc[i][5] >= 0.41 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 5]] = 1
+            elif datos.loc[i][5] < 0.175 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 5]] = 0
+            elif datos.loc[i][5] >= 0.175 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 5]] = 1
+            elif datos.loc[i][5] < 0.47 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 5]] = 0
+            elif datos.loc[i][5] >= 0.47 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 5]] = 1
+            elif datos.loc[i][5] < 0.405 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 5]] = 0
+            elif datos.loc[i][5] >= 0.405 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 5]] = 1
+
+    if datos['leucocitos'][0] == datos.loc[0][3]:
+        for i in range(len(datos)):
+            if datos.loc[i][4] < 6100 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 6100 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 4]] = 1
+            elif datos.loc[i][4] < 8250 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 8250 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 4]] = 1
+            elif datos.loc[i][4] < 5750 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 5750 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 4]] = 1
+            elif datos.loc[i][4] < 6250 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 4]] = 0
+            elif datos.loc[i][4] >= 6250 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 4]] = 1
+    else:
+        for i in range(len(datos)):
+            if datos.loc[i][6] < 6100 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 6]] = 0
+            elif datos.loc[i][6] >= 6100 and datos.loc[i][-1] == 1:
+                datos.iloc[[i, 6]] = 1
+            elif datos.loc[i][6] < 8250 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 6]] = 0
+            elif datos.loc[i][6] >= 8250 and datos.loc[i][-1] == 3:
+                datos.iloc[[i, 6]] = 1
+            elif datos.loc[i][6] < 5750 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 6]] = 0
+            elif datos.loc[i][6] >= 5750 and datos.loc[i][-1] == 0:
+                datos.iloc[[i, 6]] = 1
+            elif datos.loc[i][6] < 6250 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 6]] = 0
+            elif datos.loc[i][6] >= 6250 and datos.loc[i][-1] == 2:
+                datos.iloc[[i, 6]] = 1
+
 """
 def split_data(n_groups,X,Y):
     groups_X = []
