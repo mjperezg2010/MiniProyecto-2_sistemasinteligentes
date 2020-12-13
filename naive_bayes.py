@@ -56,7 +56,6 @@ def main():
                 model.fit(training_X, training_Y)
                 F1_val = util.F1(model, validation_X, validation_Y)
                 print(F1_val)
-                    
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

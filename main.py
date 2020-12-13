@@ -7,16 +7,19 @@ import numpy as np
 
 
 def main():
-    
+    '''
     data_sets = ["clinica_train_synth_dengue.csv",
                   "laboratorio_train_synth_dengue.csv",
                    "completo_train_synth_dengue.csv"]
-    #data_sets = ["completo_train_synth_dengue.csv"]
+    '''
+    data_sets = ["clinica_train_synth_dengue.csv"]
     
-    trees = [i*10 for i in range(1,5)]
-    criterion = ['gini','entropy']
-    max_depth = [None,3,6]
-    max_features = ['auto', 'log2']
+    #trees = [i*10 for i in range(1,5)]
+    trees = [1000]
+    #criterion = ['gini','entropy']
+    criterion = ['entropy']
+    max_depth = [None]
+    max_features = ['log2']
     groups = 5
 
     for a in data_sets:
