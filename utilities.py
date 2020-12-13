@@ -310,26 +310,6 @@ def preprocesar2(file):
     return X, Y
 
 
-"""
-def split_data(n_groups,X,Y):
-    groups_X = []
-    groups_Y = []
-    temp = [x for x in range(len(X))]
-    for _ in range(20):
-        random.shuffle(temp)
-    
-    for i in range(n_groups):
-        actual_X = []
-        actual_Y = []
-        for j in range(int(len(X)/n_groups)):
-            actual_X.append(X.values[temp[i*int(len(X.values)/n_groups)+j]])
-            actual_Y.append(Y.values[temp[i*int(len(X.values)/n_groups)+j]])
-        groups_X.append(actual_X)
-        groups_Y.append(actual_Y)
-    return groups_X,groups_Y
-"""
-
-
 # Funcion para particionar los datasets
 def split_data(n_groups, X, y):
     groups_X = []
@@ -363,6 +343,18 @@ def F1(model, x, y):
         acum = acum + i
     return acum / total
 
+def F1test(y, predicted):
+    results = f1_score(y,predicted, average=None)
+    acum = 0
+    total = len(results)
+    cont =1
+    for i in results:
+        print("F1",cont,":", i)
+        acum = acum + i
+        cont = cont +1
+    print("F1 total: ",acum / total)
+
+
 
 # Funcion de normalizacion
 def normalizacion(datos):
@@ -372,6 +364,17 @@ def normalizacion(datos):
     return datos
 
 def print_evaluation(y,predicted):
-    seaborn.heatmap(confusion_matrix(y, predicted),cmap='hot')
+    matriz =confusion_matrix(y, predicted)
+    seaborn.heatmap(matriz, cmap='inferno',cbar=False,annot=True,fmt="")
     plt.title("Matriz Confusion")
     plt.show()
+    return matriz
+
+"""
+def probar(model,validation_X,validation_Y):
+    predicted = model.predict(validation_X)
+    matriz = confusion_matrix(validation_Y, predicted)
+    seaborn.heatmap(matriz, cmap='inferno',cbar=False,annot=True,fmt="")
+    plt.title("Matriz Confusion")
+    plt.show()
+"""

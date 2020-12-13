@@ -1,8 +1,11 @@
-
-import pickle
 import sys
 import pickle
 import utilities as util
+
+def efectividad(matriz,Y):
+    total=matriz[0][0]+matriz[1][1]+matriz[2][2]+matriz[3][3]
+    return total/(len(Y))
+
 
 def main():
 
@@ -16,9 +19,14 @@ def main():
     X,Y = util.process_data(data_set)
 
 
-    Y_predic = model(X)
+    Y_predic = model.predict(X)
 
-    util.print_evaluation(Y,Y_predic)
+    matriz=util.print_evaluation(Y,Y_predic)
+    util.F1test(Y,Y_predic)
+    print("Efectividad: ",(str)(efectividad(matriz,Y)*100)+"%")
+
+
+
 
 
 if __name__ == '__main__':

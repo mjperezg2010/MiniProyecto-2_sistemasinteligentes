@@ -4,13 +4,14 @@ from sklearn.naive_bayes import BernoulliNB as model2
 from sklearn.naive_bayes import CategoricalNB as model3
 import utilities as util
 import numpy as np
+import sys
 
 def main():
     
-    #data_sets = ["clinica_train_synth_dengue.csv",
-    #                "laboratorio_train_synth_dengue.csv",
-    #               "completo_train_synth_dengue.csv"]
-    data_sets=["laboratorio_train_synth_dengue.csv"]
+    data_sets = ["clinica_train_synth_dengue.csv",
+                    "laboratorio_train_synth_dengue.csv",
+                   "completo_train_synth_dengue.csv"]
+    #data_sets=["laboratorio_train_synth_dengue.csv"]
                 
     groups = 5
 
