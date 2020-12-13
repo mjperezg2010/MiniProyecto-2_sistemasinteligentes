@@ -9,7 +9,7 @@ def main():
     data_set = sys.argv[1]
     model_name = sys.argv[2]
 
-    c = 1.5
+    C = 1.5
     kernel = 'rbf'
     gamma = 'scale'
 
