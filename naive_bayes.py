@@ -14,23 +14,27 @@ def main():
     groups = 5
 
     for a in data_sets:
-        X,Y = util.process_data(a)
-        X = util.normalizacion(X)        
+                
         for m in [0,1,2]:
             print(m)
             if m == 0:
+                X,Y = util.process_data(a)
+                #X = util.normalizacion(X)
                 model = model1(
                     
                 )
             elif m == 1:
+                X,Y = util.process_data(a)
+                X = util.preprocesar2(X)
                 model = model2(
                     
                 )
             else:
+                X,Y = util.process_data(a)
+                X = util.preprocesar2(X)
                 model = model3(
                     
-                )   
-                X = X+10                             
+                )                                
             groups_X, groups_Y = util.split_data(groups, X, Y)
             groups_Y = groups_Y.astype('int')
             for i in range(groups):
