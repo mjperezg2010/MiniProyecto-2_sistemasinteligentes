@@ -201,14 +201,14 @@ def preprocesar2(datos):
             elif datos.loc[i][6] >= 6250 and datos.loc[i][-1] == 2:
                 datos.iloc[[i, 6]] = 1
 
-    print(datos['leucocitos'])
+    print(datos.tostring())
 
 
 
 def main():
-    #datos=pd.read_csv("laboratorio_train_synth_dengue.csv")
+    datos=pd.read_csv("laboratorio_train_synth_dengue.csv")
     #print(datos.loc[0][-1])
-    datos=pd.read_csv("completo_train_synth_dengue.csv")
+    #datos=pd.read_csv("completo_train_synth_dengue.csv")
     datos=preprocesar(datos)
     preprocesar2(datos)
     #print(datos.head())
