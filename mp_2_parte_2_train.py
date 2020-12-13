@@ -1,7 +1,6 @@
 import utilities as util
 import sys
 from sklearn.ensemble import RandomForestClassifier as model_gen
-import numpy as np
 import pickle
 
 def main():

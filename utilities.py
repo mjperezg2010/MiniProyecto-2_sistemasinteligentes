@@ -370,11 +370,3 @@ def print_evaluation(y,predicted):
     plt.show()
     return matriz
 
-"""
-def probar(model,validation_X,validation_Y):
-    predicted = model.predict(validation_X)
-    matriz = confusion_matrix(validation_Y, predicted)
-    seaborn.heatmap(matriz, cmap='inferno',cbar=False,annot=True,fmt="")
-    plt.title("Matriz Confusion")
-    plt.show()
-"""
