@@ -25,7 +25,7 @@ def main():
         X,Y = util.preprocesar2(data_set)
         X = X+1
     else:
-        print("esta malo xdXxdXd")
+        print("clasificador incorrecto")
 
 
     Y_predic = model.predict(X)

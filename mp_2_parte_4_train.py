@@ -1,11 +1,8 @@
 import utilities as util
 import sys
-
 from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.naive_bayes import CategoricalNB
-
-import numpy as np
 import pickle
 
 def main():

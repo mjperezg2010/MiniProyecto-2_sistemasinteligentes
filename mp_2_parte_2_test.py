@@ -2,6 +2,7 @@ import sys
 import pickle
 import utilities as util
 
+#funcion para calcular la efectividad
 def efectividad(matriz,Y):
     total=matriz[0][0]+matriz[1][1]+matriz[2][2]+matriz[3][3]
     return total/(len(Y))

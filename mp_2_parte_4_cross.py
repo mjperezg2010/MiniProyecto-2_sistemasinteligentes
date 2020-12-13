@@ -8,32 +8,30 @@ import sys
 def main():
     
     data_sets = [sys.argv[1]]
-    #data_sets=["laboratorio_train_synth_dengue.csv"]
             
     groups = 5
 
     for a in data_sets:
-        #X,Y=util.process_data(a)
         print()
         for m in [0,1,2]:
             print(m)
             if m == 0:
                 print("Gaussian")
                 X,Y = util.process_data(a)
-                #X = util.normalizacion(X)
+
                 model = model1(
                     
                 )
             elif m == 1:
                 print("Bernoulli")
-                #X,Y = util.process_data(a)
+
                 X,Y = util.preprocesar2(a)
                 model = model2(
                     
                 )
             else:
                 print("Categorical")
-                #X,Y = util.process_data(a)
+
                 X,Y = util.preprocesar2(a)
                 X = X +10
                 model = model3(
@@ -59,7 +57,7 @@ def main():
                 values_f1 += util.F1(model, validation_X, validation_Y)                              
             print("F1: "+str(values_f1/groups))            
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
     main()
 

@@ -31,6 +31,5 @@ def main():
     with open(model_name, "wb") as f:
         pickle.dump(model, f)
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     main()
