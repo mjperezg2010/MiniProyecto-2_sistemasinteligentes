@@ -12,15 +12,12 @@ def main():
     data_set = sys.argv[1]
     model_name = sys.argv[2]
 
-
                      
     with open(model_name, "rb") as f:
         model = pickle.load(f)
 
     X,Y = util.process_data(data_set)
-
-
-
+    X = util.normalizacion(X)
 
 
     Y_predic = model.predict(X)
@@ -28,9 +25,6 @@ def main():
     matriz=util.print_evaluation(Y,Y_predic)
     util.F1test(Y,Y_predic)
     print("Efectividad: ",(str)(efectividad(matriz,Y)*100)+"%")
-
-
-
 
 
 if __name__ == '__main__':

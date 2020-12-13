@@ -6,7 +6,7 @@ import pickle
 def main():
     
     data_set = sys.argv[1]
-    model_name = sys.argv[2]+".pickle"
+    model_name = sys.argv[2]
     
     trees = 30
     criterion = 'entropy'
