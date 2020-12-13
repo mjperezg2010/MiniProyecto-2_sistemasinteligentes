@@ -1,9 +1,11 @@
 import numpy as np
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, confusion_matrix
 import pandas as pd
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import StandardScaler
 import statistics as stats
+import seaborn
+import matplotlib.pyplot as plt
 
 
 # Funciones
@@ -54,17 +56,6 @@ def preprocesar2(file):
     datos = datos.replace("NA", -1, regex=True)
     datos = datos.replace("Positiva", 0, regex=True)
     datos = datos.replace("Negativa", 1, regex=True)
-
-    #print(datos[])
-    # A B C D
-    # 0 1 0 1
-    # 0 2 3 4
-    # 9 7 2 1
-
-    #Columna B, con valor D=1
-    # 1,7
-
-
 
     if len(datos.loc[0]) != 18:
 
@@ -123,8 +114,18 @@ def preprocesar2(file):
             cont2 = cont2 + 1
 
 
+        """
+        df = datos[datos['clase'] == 0]['plaquetas']
+        med0 = stats.median(df)
+        df = datos[datos['clase'] == 1]['plaquetas']
+        med1 = stats.median(df)
+        df = datos[datos['clase'] == 2]['plaquetas']
+        med2 = stats.median(df)
+        df = datos[datos['clase'] == 3]['plaquetas']
+        med3 = stats.median(df)
 
         if datos['plaquetas'][0] == datos.loc[0][1]:
+            print("entro-plaquetas")
             for i in range(len(datos)):
                 if datos.loc[i][1] < med1 and datos.loc[i][5] == 1:
                     datos.iloc[i, 1] = 0
@@ -171,6 +172,7 @@ def preprocesar2(file):
         med3 = stats.median(df)
 
         if datos['linfocitos'][0] == datos.loc[0][2]:
+            print("entro-linfocitos")
             for i in range(len(datos)):
                 if datos.loc[i][2] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 2] = 0
@@ -207,8 +209,17 @@ def preprocesar2(file):
                 elif datos.loc[i][4] >= med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 4] = 1
 
-        if datos['hematocritos'][0] == datos.loc[0][3]:
+        df = datos[datos['clase'] == 0]['hematocritos']
+        med0 = stats.median(df)
+        df = datos[datos['clase'] == 1]['hematocritos']
+        med1 = stats.median(df)
+        df = datos[datos['clase'] == 2]['hematocritos']
+        med2 = stats.median(df)
+        df = datos[datos['clase'] == 3]['hematocritos']
+        med3 = stats.median(df)
 
+        if datos['hematocritos'][0] == datos.loc[0][3]:
+            print("entro-hematocritos")
             for i in range(len(datos)):
                 if datos.loc[i][3] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 3] = 0
@@ -228,61 +239,71 @@ def preprocesar2(file):
                     datos.iloc[i, 3] = 1
         else:
             for i in range(len(datos)):
-                if datos.loc[i][5] < 0.41 and datos.loc[i][-1] == 1:
+                if datos.loc[i][5] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 5] = 0
-                elif datos.loc[i][5] >= 0.41 and datos.loc[i][-1] == 1:
+                elif datos.loc[i][5] >= med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 5] = 1
-                elif datos.loc[i][5] < 0.175 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][5] < med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 5] = 0
-                elif datos.loc[i][5] >= 0.175 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][5] >= med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 5] = 1
-                elif datos.loc[i][5] < 0.47 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][5] < med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 5] = 0
-                elif datos.loc[i][5] >= 0.47 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][5] >= med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 5] = 1
-                elif datos.loc[i][5] < 0.405 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][5] < med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 5] = 0
-                elif datos.loc[i][5] >= 0.405 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][5] >= med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 5] = 1
 
+        df = datos[datos['clase'] == 0]['leucocitos']
+        med0 = stats.median(df)
+        df = datos[datos['clase'] == 1]['leucocitos']
+        med1 = stats.median(df)
+        df = datos[datos['clase'] == 2]['leucocitos']
+        med2 = stats.median(df)
+        df = datos[datos['clase'] == 3]['leucocitos']
+        med3 = stats.median(df)
+
         if datos['leucocitos'][0] == datos.loc[0][4]:
+            print("entro-leucocitos")
             for i in range(len(datos)):
-                if datos.loc[i][4] < 6100 and datos.loc[i][-1] == 1:
+                if datos.loc[i][4] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 6100 and datos.loc[i][-1] == 1:
+                elif datos.loc[i][4] >= med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 4] = 1
-                elif datos.loc[i][4] < 8250 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][4] < med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 8250 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][4] >= med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 4] = 1
-                elif datos.loc[i][4] < 5750 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][4] < med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 5750 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][4] >= med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 4] = 1
-                elif datos.loc[i][4] < 6250 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][4] < med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 6250 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][4] >= med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 4] = 1
         else:
             for i in range(len(datos)):
+                if datos.loc[i][6] < med1 and datos.loc[i][-1] == 1:
+                    datos.iloc[i, 6] = 0
+                elif datos.loc[i][6] >= med1 and datos.loc[i][-1] == 1:
+                    datos.iloc[i, 6] = 1
+                elif datos.loc[i][6] < med3 and datos.loc[i][-1] == 3:
+                    datos.iloc[i, 6] = 0
+                elif datos.loc[i][6] >= med3 and datos.loc[i][-1] == 3:
+                    datos.iloc[i, 6] = 1
+                elif datos.loc[i][6] < med0 and datos.loc[i][-1] == 0:
+                    datos.iloc[i, 6] = 0
+                elif datos.loc[i][6] >= med0 and datos.loc[i][-1] == 0:
+                    datos.iloc[i, 6] = 1
+                elif datos.loc[i][6] < med2 and datos.loc[i][-1] == 2:
+                    datos.iloc[i, 6] = 0
+                elif datos.loc[i][6] >= med2 and datos.loc[i][-1] == 2:
+                    datos.iloc[i, 6] = 1
 
-                if datos.loc[i][6] < 6100 and datos.loc[i][-1] == 1:
-                    datos.iloc[i, 6] = 0
-                elif datos.loc[i][6] >= 6100 and datos.loc[i][-1] == 1:
-                    datos.iloc[i, 6] = 1
-                elif datos.loc[i][6] < 8250 and datos.loc[i][-1] == 3:
-                    datos.iloc[i, 6] = 0
-                elif datos.loc[i][6] >= 8250 and datos.loc[i][-1] == 3:
-                    datos.iloc[i, 6] = 1
-                elif datos.loc[i][6] < 5750 and datos.loc[i][-1] == 0:
-                    datos.iloc[i, 6] = 0
-                elif datos.loc[i][6] >= 5750 and datos.loc[i][-1] == 0:
-                    datos.iloc[i, 6] = 1
-                elif datos.loc[i][6] < 6250 and datos.loc[i][-1] == 2:
-                    datos.iloc[i, 6] = 0
-                elif datos.loc[i][6] >= 6250 and datos.loc[i][-1] == 2:
-                    datos.iloc[i, 6] = 1
-
+        """
     X = datos.loc[:, datos.columns != 'clase']
     Y = datos['clase']
 
@@ -335,7 +356,7 @@ def print_data(a, b, c, d, e, i, F1):
 # Funcion que devuelve el F1-score
 def F1(model, x, y):
     predicted = model.predict(x)
-    results = f1_score(predicted, y, average=None)
+    results = f1_score(y,predicted, average=None)
     acum = 0
     total = len(results)
     for i in results:
@@ -349,3 +370,8 @@ def normalizacion(datos):
     scaled = scaler.fit_transform(datos)
     datos = pd.DataFrame(scaled)
     return datos
+
+def print_evaluation(y,predicted):
+    seaborn.heatmap(confusion_matrix(y, predicted),cmap='hot')
+    plt.title("Matriz Confusion")
+    plt.show()
