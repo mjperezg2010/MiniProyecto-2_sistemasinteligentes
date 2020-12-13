@@ -3,6 +3,7 @@ from sklearn.metrics import f1_score
 import pandas as pd
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import StandardScaler
+import statistics as stats
 
 
 # Funciones
@@ -60,102 +61,170 @@ def preprocesar2(file):
     # 0 2 3 4
     # 9 7 2 1
 
-    #
-   # print(datos.loc[datos['clase'] == 1][0])
+    #Columna B, con valor D=1
+    # 1,7
+
+
 
     if len(datos.loc[0]) != 18:
+
+
+        lista=['plaquetas','linfocitos','hematocritos','leucocitos']
+        cont=1
+        cont2=3
+        for l in lista:
+            df = datos[datos['clase'] == 0][l]
+            med0 = stats.median(df)
+            df = datos[datos['clase'] == 1][l]
+            med1 = stats.median(df)
+            df = datos[datos['clase'] == 2][l]
+            med2 = stats.median(df)
+            df = datos[datos['clase'] == 3][l]
+            med3 = stats.median(df)
+
+            if datos[l][0] == datos.loc[0][cont]:
+                for i in range(len(datos)):
+                    if datos.loc[i][cont] < med1 and datos.loc[i][-1] == 1:
+                        datos.iloc[i, cont] = 0
+                    elif datos.loc[i][cont] >= med1 and datos.loc[i][-1] == 1:
+                        datos.iloc[i, cont] = 1
+                    elif datos.loc[i][cont] < med3 and datos.loc[i][-1] == 3:
+                        datos.iloc[i, cont] = 0
+                    elif datos.loc[i][cont] >= med3 and datos.loc[i][-1] == 3:
+                        datos.iloc[i, cont] = 1
+                    elif datos.loc[i][cont] < med0 and datos.loc[i][-1] == 0:
+                        datos.iloc[i, cont] = 0
+                    elif datos.loc[i][cont] >= med0 and datos.loc[i][-1] == 0:
+                        datos.iloc[i, cont] = 1
+                    elif datos.loc[i][cont] < med2 and datos.loc[i][-1] == 2:
+                        datos.iloc[i, cont] = 0
+                    elif datos.loc[i][cont] >= med2 and datos.loc[i][-1] == 2:
+                        datos.iloc[i, cont] = 1
+            else:
+                for i in range(len(datos)):
+                    if datos.loc[i][cont2] < med1 and datos.loc[i][-1] == 1:
+                        datos.iloc[i, cont2] = 0
+                    elif datos.loc[i][cont2] >= med1 and datos.loc[i][-1] == 1:
+                        datos.iloc[i, cont2] = 1
+                    elif datos.loc[i][cont2] < med3 and datos.loc[i][-1] == 3:
+                        datos.iloc[i, cont2] = 0
+                    elif datos.loc[i][cont2] >= med3 and datos.loc[i][-1] == 3:
+                        datos.iloc[i, cont2] = 1
+                    elif datos.loc[i][cont2] < med0 and datos.loc[i][-1] == 0:
+                        datos.iloc[i, cont2] = 0
+                    elif datos.loc[i][cont2] >= med0 and datos.loc[i][-1] == 0:
+                        datos.iloc[i, cont2] = 1
+                    elif datos.loc[i][cont2] < med2 and datos.loc[i][-1] == 2:
+                        datos.iloc[i, cont2] = 0
+                    elif datos.loc[i][cont2] >= med2 and datos.loc[i][-1] == 2:
+                        datos.iloc[i, cont2] = 1
+
+            cont = cont +1
+            cont2 = cont2 + 1
+
+
+
         if datos['plaquetas'][0] == datos.loc[0][1]:
             for i in range(len(datos)):
-                if datos.loc[i][1] < 193000 and datos.loc[i][5] == 1:
+                if datos.loc[i][1] < med1 and datos.loc[i][5] == 1:
                     datos.iloc[i, 1] = 0
-                elif datos.loc[i][1] >= 193000 and datos.loc[i][5] == 1:
+                elif datos.loc[i][1] >= med1 and datos.loc[i][5] == 1:
                     datos.iloc[i, 1] = 1
-                elif datos.loc[i][1] < 275000 and datos.loc[i][5] == 3:
+                elif datos.loc[i][1] < med3 and datos.loc[i][5] == 3:
                     datos.iloc[i, 1] = 0
-                elif datos.loc[i][1] >= 275000 and datos.loc[i][5] == 3:
+                elif datos.loc[i][1] >= med3 and datos.loc[i][5] == 3:
                     datos.iloc[i, 1] = 1
-                elif datos.loc[i][1] < 125000 and datos.loc[i][5] == 0:
+                elif datos.loc[i][1] < med0 and datos.loc[i][5] == 0:
                     datos.iloc[i, 1] = 0
-                elif datos.loc[i][1] >= 125000 and datos.loc[i][5] == 0:
+                elif datos.loc[i][1] >= med0 and datos.loc[i][5] == 0:
                     datos.iloc[i, 1] = 1
-                elif datos.loc[i][1] < 198000 and datos.loc[i][5] == 2:
+                elif datos.loc[i][1] < med2 and datos.loc[i][5] == 2:
                     datos.iloc[i, 1] = 0
-                elif datos.loc[i][1] >= 198000 and datos.loc[i][5] == 2:
+                elif datos.loc[i][1] >= med2 and datos.loc[i][5] == 2:
                     datos.iloc[i, 1] = 1
         else:
             for i in range(len(datos)):
-                if datos.loc[i][3] < 193000 and datos.loc[i][-1] == 1:
+                if datos.loc[i][3] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 193000 and datos.loc[i][-1] == 1:
+                elif datos.loc[i][3] >= med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 3] = 1
-                elif datos.loc[i][3] < 275000 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][3] < med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 275000 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][3] >= med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 3] = 1
-                elif datos.loc[i][3] < 125000 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][3] < med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 125000 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][3] >= med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 3] = 1
-                elif datos.loc[i][3] < 198000 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][3] < med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 198000 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][3] >= med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 3] = 1
+
+        df = datos[datos['clase'] == 0]['linfocitos']
+        med0 = stats.median(df)
+        df = datos[datos['clase'] == 1]['linfocitos']
+        med1 = stats.median(df)
+        df = datos[datos['clase'] == 2]['linfocitos']
+        med2 = stats.median(df)
+        df = datos[datos['clase'] == 3]['linfocitos']
+        med3 = stats.median(df)
 
         if datos['linfocitos'][0] == datos.loc[0][2]:
             for i in range(len(datos)):
-                if datos.loc[i][2] < 0.41 and datos.loc[i][-1] == 1:
+                if datos.loc[i][2] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 2] = 0
-                elif datos.loc[i][2] >= 0.41 and datos.loc[i][-1] == 1:
+                elif datos.loc[i][2] >= med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 2] = 1
-                elif datos.loc[i][2] < 0.175 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][2] < med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 2] = 0
-                elif datos.loc[i][2] >= 0.175 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][2] >= med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 2] = 1
-                elif datos.loc[i][2] < 0.47 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][2] < med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 2] = 0
-                elif datos.loc[i][2] >= 0.47 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][2] >= med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 2] = 1
-                elif datos.loc[i][2] < 0.405 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][2] < med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 2] = 0
-                elif datos.loc[i][2] >= 0.405 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][2] >= med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 2] = 1
         else:
             for i in range(len(datos)):
-                if datos.loc[i][4] < 0.41 and datos.loc[i][-1] == 1:
+                if datos.loc[i][4] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 0.41 and datos.loc[i][-1] == 1:
+                elif datos.loc[i][4] >= med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 4] = 1
-                elif datos.loc[i][4] < 0.175 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][4] < med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 0.175 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][4] >= med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 4] = 1
-                elif datos.loc[i][4] < 0.47 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][4] < med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 0.47 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][4] >= med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 4] = 1
-                elif datos.loc[i][4] < 0.405 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][4] < med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 4] = 0
-                elif datos.loc[i][4] >= 0.405 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][4] >= med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 4] = 1
 
         if datos['hematocritos'][0] == datos.loc[0][3]:
 
             for i in range(len(datos)):
-                if datos.loc[i][3] < 0.44 and datos.loc[i][-1] == 1:
+                if datos.loc[i][3] < med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 0.44 and datos.loc[i][-1] == 1:
+                elif datos.loc[i][3] >= med1 and datos.loc[i][-1] == 1:
                     datos.iloc[i, 3] = 1
-                elif datos.loc[i][3] < 0.422 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][3] < med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 0.422 and datos.loc[i][-1] == 3:
+                elif datos.loc[i][3] >= med3 and datos.loc[i][-1] == 3:
                     datos.iloc[i, 3] = 1
-                elif datos.loc[i][3] < 0.452 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][3] < med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 0.452 and datos.loc[i][-1] == 0:
+                elif datos.loc[i][3] >= med0 and datos.loc[i][-1] == 0:
                     datos.iloc[i, 3] = 1
-                elif datos.loc[i][3] < 0.43 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][3] < med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 3] = 0
-                elif datos.loc[i][3] >= 0.43 and datos.loc[i][-1] == 2:
+                elif datos.loc[i][3] >= med2 and datos.loc[i][-1] == 2:
                     datos.iloc[i, 3] = 1
         else:
             for i in range(len(datos)):

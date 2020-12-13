@@ -7,10 +7,10 @@ import numpy as np
 
 def main():
     
-    data_sets = ["clinica_train_synth_dengue.csv",
-                    "laboratorio_train_synth_dengue.csv",
-                   "completo_train_synth_dengue.csv"]
-    #data_sets=["clinica_train_synth_dengue.csv"]
+    #data_sets = ["clinica_train_synth_dengue.csv",
+    #                "laboratorio_train_synth_dengue.csv",
+    #               "completo_train_synth_dengue.csv"]
+    data_sets=["laboratorio_train_synth_dengue.csv"]
                 
     groups = 5
 
