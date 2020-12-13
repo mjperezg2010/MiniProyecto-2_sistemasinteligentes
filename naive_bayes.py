@@ -9,11 +9,13 @@ def main():
     
     data_sets = ["clinica_train_synth_dengue.csv",
                     "laboratorio_train_synth_dengue.csv",
-                    "completo_train_synth_dengue.csv"]
+                   "completo_train_synth_dengue.csv"]
+    #data_sets=["clinica_train_synth_dengue.csv"]
                 
     groups = 5
 
     for a in data_sets:
+        #X,Y=util.process_data(a)
                 
         for m in [0,1,2]:
             print(m)
@@ -24,14 +26,15 @@ def main():
                     
                 )
             elif m == 1:
-                X,Y = util.process_data(a)
-                X = util.preprocesar2(X)
+                #X,Y = util.process_data(a)
+                X,Y = util.preprocesar2(a)
                 model = model2(
                     
                 )
             else:
-                X,Y = util.process_data(a)
-                X = util.preprocesar2(X)
+                #X,Y = util.process_data(a)
+                X,Y = util.preprocesar2(a)
+                X = X +10
                 model = model3(
                     
                 )                                
