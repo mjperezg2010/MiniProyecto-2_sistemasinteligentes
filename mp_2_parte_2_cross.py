@@ -1,25 +1,17 @@
 import utilities as util
-
+import sys
 from sklearn.ensemble import RandomForestClassifier as model_gen
 import numpy as np
 
-# Press the green button in the gutter to run the script.
-
-
 def main():
-    '''
-    data_sets = ["clinica_train_synth_dengue.csv",
-                  "laboratorio_train_synth_dengue.csv",
-                   "completo_train_synth_dengue.csv"]
-    '''
-    data_sets = ["clinica_train_synth_dengue.csv"]
     
-    #trees = [i*10 for i in range(1,5)]
-    trees = [1000]
-    #criterion = ['gini','entropy']
-    criterion = ['entropy']
-    max_depth = [None]
-    max_features = ['log2']
+    data_sets = [sys.argv[1]]
+    
+    trees = [i*10 for i in range(1,5)]    
+    criterion = ['gini','entropy']    
+    max_depth = [None,3,6]
+    max_features = ['auto','log2']
+
     groups = 5
 
     for a in data_sets:
@@ -37,6 +29,7 @@ def main():
                         groups_X,groups_Y = util.split_data(groups,X,Y)
                         values_f1 = ""
                         groups_Y=groups_Y.astype('int')
+                        values_f1 = 0
                         for i in range(groups):
                             validation_X = groups_X[i]
                             validation_Y = groups_Y[i]
@@ -46,19 +39,22 @@ def main():
                             else:
                                 training_X = groups_X[1]
                                 training_Y = groups_Y[1]
-                            #training_X=np.array([])
-                            #training_Y=np.array([])
 
                             for j in range(1,groups):
                                 if j != i:
                                     training_X=np.concatenate((training_X,groups_X[i]))
                                     training_Y = np.concatenate((training_Y, groups_Y[i]))
 
-                            model.fit(training_X,training_Y)
-                            #model.predict(training_X)
+                            model.fit(training_X,training_Y)                            
                             F1_val = util.F1(model,validation_X,validation_Y)
-                            values_f1+=(str)(F1_val)+" "
-                        util.print_data(a,b,c,d,e,i,values_f1)
+                            values_f1 += F1_val
+                        print("Dataset: "+data_sets[0])
+                        print("num arboles: "+str(b))
+                        print("criterio: "+c)
+                        print("profundidad: "+str(d))
+                        print("features: "+str(e))
+                        print("F1: "+str(values_f1/groups)) 
+                        print()                                           
                             
 if __name__ == '__main__':
     main()
